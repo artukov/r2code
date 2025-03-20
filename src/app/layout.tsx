@@ -30,12 +30,6 @@ export const metadata: Metadata = {
         type: 'image/svg+xml',
         sizes: '512x512',
       },
-      // Add PNG version for better Google search result compatibility
-      {
-        url: '/r2code-logo.png',
-        type: 'image/png',
-        sizes: '512x512',
-      },
     ],
     // Add Apple touch icon for iOS devices
     apple: [
@@ -60,7 +54,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: 'https://r2code.com/r2code-logo.svg', // Use absolute URL for OG images
+        url: 'https://r2code.com/r2code-logo.svg', // Use SVG for OG images
         width: 512,
         height: 512,
         alt: 'R2code Logo',
@@ -73,7 +67,7 @@ export const metadata: Metadata = {
     card: 'summary',
     title: "R2code | Professional Software Development Services",
     description: "Building scalable & secure software solutions for innovative businesses",
-    images: ['https://r2code.com/r2code-logo.svg'],
+    images: ['https://r2code.com/r2code-logo.svg'], // Use SVG for Twitter card
     site: '@r2codedev', // Add your Twitter handle if you have one
   },
   alternates: {
