@@ -69,7 +69,7 @@ export default function ContactSection() {
             <div className="w-20 h-1 bg-blue-600 mx-auto mb-8"></div>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Ready to start your next project? Contact us for a free consultation. 
-              Let's discuss how we can help bring your ideas to life.
+              Let&apos;s discuss how we can help bring your ideas to life.
             </p>
           </div>
           
