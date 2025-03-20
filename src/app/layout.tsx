@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import ClientLayout from "@/app/client-layout";
+import ClientLayout from "./client-layout";
 
 // Initialize font
 const inter = Inter({
