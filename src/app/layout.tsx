@@ -113,7 +113,7 @@ export default function RootLayout({
               "addressLocality": "Sremska Mitrovica",
               "addressCountry": "Serbia"
             },
-            "email": "nikolartukov@gmail.com",
+            "email": "nikola@r2code.com",
             "telephone": "+381 64 953 7765",
             "priceRange": "$$",
             "serviceArea": "Worldwide",

@@ -12,7 +12,7 @@ Follow these steps to configure EmailJS for your R2code contact form:
 1. In the EmailJS dashboard, go to "Email Services" in the sidebar
 2. Click "Add New Service"
 3. Choose your email provider (Gmail is recommended for simplicity)
-4. Follow the authentication steps to connect your nikolartukov@gmail.com email
+4. Follow the authentication steps to connect your nikola@r2code.com email
 5. Give your service a name (e.g., "R2code Contact Form")
 6. Note down the **Service ID** that is created for you (it will look like "service_xxxxxxx")
 
