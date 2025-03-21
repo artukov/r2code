@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
+import { EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID } from '@/utils/emailjs';
 
 export default function ContactSection() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -12,6 +13,7 @@ export default function ContactSection() {
     email: '',
     company: '',
     message: '',
+    website: '', // Honeypot field - should remain empty for real users
   });
   
   // Form status state (for showing success/error messages)
@@ -22,21 +24,89 @@ export default function ContactSection() {
     loading: false,
   });
   
+  // Add this near your other state declarations 
+  const [csrfToken, setCsrfToken] = useState('');
+  
+  // Add these near your other state declarations
+  const [submissionCount, setSubmissionCount] = useState(0);
+  const [lastSubmissionTime, setLastSubmissionTime] = useState(0);
+  
+  // Generate CSRF token on component mount
+  useEffect(() => {
+    // Simple token generation - in production use a more secure method
+    const token = Math.random().toString(36).substring(2, 15) + 
+                  Math.random().toString(36).substring(2, 15);
+    setCsrfToken(token);
+  }, []);
+
+  // Add this sanitization function
+  const sanitizeInput = (str: string): string => {
+    return str.replace(/[<>&"']/g, (match) => {
+      switch (match) {
+        case '<': return '&lt;';
+        case '>': return '&gt;';
+        case '&': return '&amp;';
+        case '"': return '&quot;';
+        case "'": return '&#39;';
+        default: return match;
+      }
+    });
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData({
+      ...formData,
+      [name]: sanitizeInput(value)
+    });
   };
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Honeypot check - if the hidden field is filled, it's likely a bot
+    if (formData.website) {
+      // Silently reject the submission but pretend it was successful
+      setFormStatus({
+        message: 'Thank you for your message! We will get back to you soon.',
+        success: true,
+        submitted: true,
+        loading: false,
+      });
+      return;
+    }
+    
+    // Rate limiting check
+    const now = Date.now();
+    const timeSinceLastSubmission = now - lastSubmissionTime;
+    
+    // Allow 3 submissions, then enforce 1-minute cooldown
+    if (submissionCount >= 3 && timeSinceLastSubmission < 60000) {
+      setFormStatus({
+        message: 'Too many requests. Please try again in a minute.',
+        success: false,
+        submitted: true,
+        loading: false,
+      });
+      return;
+    }
+    
+    // Reset count after 10 minutes
+    if (timeSinceLastSubmission > 600000) {
+      setSubmissionCount(0);
+    }
+    
+    // Update submission tracking
+    setSubmissionCount(prevCount => prevCount + 1);
+    setLastSubmissionTime(now);
     
     // Show loading state
     setFormStatus(prev => ({ ...prev, loading: true }));
     
     // Using EmailJS to send the form
     emailjs.sendForm(
-      'service_mnf2zoh', // Service ID
-      'template_ao1b9qm', // Template ID
+      EMAILJS_SERVICE_ID, // Service ID from constants file
+      EMAILJS_TEMPLATE_ID, // Template ID from constants file
       formRef.current as HTMLFormElement,
       'DaAHzgsVwNFG0K54o' // Public Key
     )
@@ -48,7 +118,7 @@ export default function ContactSection() {
         submitted: true,
         loading: false,
       });
-      setFormData({ name: '', email: '', company: '', message: '' });
+      setFormData({ name: '', email: '', company: '', message: '', website: '' });
     }, (error) => {
       console.error('Failed to send email:', error.text);
       setFormStatus({
@@ -126,6 +196,22 @@ export default function ContactSection() {
                 </div>
               ) : (
                 <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+                  <input type="hidden" name="_csrf" value={csrfToken} />
+                  
+                  {/* Honeypot field - hidden from users but bots will fill it */}
+                  <div style={{ opacity: 0, position: 'absolute', top: '-9999px', left: '-9999px' }}>
+                    <label htmlFor="website">Website</label>
+                    <input
+                      type="text"
+                      id="website"
+                      name="website"
+                      value={formData.website}
+                      onChange={handleChange}
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
+                  
                   <div>
                     <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
                       Your Name *

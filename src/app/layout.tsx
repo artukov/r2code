@@ -42,6 +42,10 @@ export const metadata: Metadata = {
     // Add shortcut icon explicitly
     shortcut: { url: '/favicon.ico' },
   },
+  // Add CSP meta tag for enhanced security
+  other: {
+    "Content-Security-Policy": "default-src 'self'; script-src 'self' https://www.emailjs.com https://cdn.emailjs.com 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://api.emailjs.com; font-src 'self'; frame-src 'none'; object-src 'none';"
+  },
   // Add verification for Google Search Console (you would replace this with your actual verification code)
   verification: {
     google: 'your-google-site-verification-code', // Replace with your actual code when you get it
