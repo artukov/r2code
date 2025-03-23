@@ -65,3 +65,31 @@ section {
 html {
   overflow-y: scroll;
 }
+
+/* Improved animation handling for fast scrolling */
+[data-aos] {
+  /* Make elements partially visible before animation completes */
+  opacity: 0.5;
+  /* Allow animations to work but prevent complete invisibility */
+  visibility: visible;
+  /* Smoother transitions */
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Remove the force visibility sections that are breaking animations */
+/* Force visibility for card content */
+.bg-white [data-aos],
+.service-card [data-aos],
+section [data-aos] {
+  /* Allow animations but keep content partially visible */
+  opacity: 0.5;
+}
+
+/* When users have reduced motion enabled, disable animations */
+@media (prefers-reduced-motion) {
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

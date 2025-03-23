@@ -60,7 +60,7 @@ export default function ServicesSection() {
     <section id="services" className="py-16 md:py-24 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16" data-aos="fade-up" data-aos-duration="800">
+          <div className="text-center mb-16" data-aos="fade-up" data-aos-duration="600">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
             <div className="w-20 h-1 bg-blue-600 mx-auto mb-8"></div>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
@@ -74,16 +74,14 @@ export default function ServicesSection() {
               <div 
                 key={index} 
                 className="bg-white rounded-lg shadow-md p-8 transition-all hover:shadow-lg"
-                data-aos="flip-up"
+                data-aos="fade-up"
                 data-aos-delay={index * 100}
-                data-aos-duration="1000"
-                data-aos-offset="200"
-                data-aos-anchor-placement="top-bottom"
+                data-aos-duration="800"
               >
                 <div 
                   className="mb-6" 
                   data-aos="zoom-in" 
-                  data-aos-delay={index * 100 + 400}
+                  data-aos-delay={index * 100 + 200}
                   data-aos-duration="800"
                 >
                   {service.icon}
@@ -91,16 +89,16 @@ export default function ServicesSection() {
                 <h3 
                   className="text-xl font-bold text-gray-800 mb-3"
                   data-aos="fade-up" 
-                  data-aos-delay={index * 100 + 200}
-                  data-aos-duration="600"
+                  data-aos-delay={index * 100 + 150}
+                  data-aos-duration="700"
                 >
                   {service.title}
                 </h3>
                 <p 
                   className="text-gray-600"
                   data-aos="fade-up" 
-                  data-aos-delay={index * 100 + 300}
-                  data-aos-duration="600"
+                  data-aos-delay={index * 100 + 200}
+                  data-aos-duration="700"
                 >
                   {service.description}
                 </p>
