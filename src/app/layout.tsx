@@ -17,16 +17,16 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/favicon.ico',
+        url: '/R2C/PNG/transparent.png',
         sizes: 'any',
-        type: 'image/x-icon',
+        type: 'image/png',
       },
       {
-        url: '/favicon.svg',
+        url: '/R2C/SVG/transparent.svg',
         type: 'image/svg+xml',
       },
       {
-        url: '/r2code-logo.svg',
+        url: '/R2C/SVG/transparent.svg',
         type: 'image/svg+xml',
         sizes: '512x512',
       },
@@ -34,13 +34,13 @@ export const metadata: Metadata = {
     // Add Apple touch icon for iOS devices
     apple: [
       {
-        url: '/r2code-logo.svg',
+        url: '/R2C/PNG/transparent.png',
         sizes: '180x180',
-        type: 'image/svg+xml',
+        type: 'image/png',
       }
     ],
     // Add shortcut icon explicitly
-    shortcut: { url: '/favicon.ico' },
+    shortcut: { url: '/R2C/PNG/transparent.png' },
   },
   // Add CSP meta tag for enhanced security
   other: {
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: 'https://r2code.com/r2code-logo.svg', // Use SVG for OG images
+        url: 'https://r2code.com/R2C/PNG/transparent.png', // Use PNG for OG images for better compatibility
         width: 512,
         height: 512,
         alt: 'R2code Logo',
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     card: 'summary',
     title: "R2code | Professional Software Development Services",
     description: "Building scalable & secure software solutions for innovative businesses",
-    images: ['https://r2code.com/r2code-logo.svg'], // Use SVG for Twitter card
+    images: ['https://r2code.com/R2C/PNG/transparent.png'], // Use PNG for Twitter card
     site: '@r2codedev', // Add your Twitter handle if you have one
   },
   alternates: {
@@ -100,6 +100,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <link rel="icon" href="/R2C/PNG/transparent.png" />
+        <link rel="apple-touch-icon" href="/R2C/PNG/transparent.png" />
+      </head>
       <Script
         id="schema-org-script"
         type="application/ld+json"
@@ -109,8 +113,8 @@ export default function RootLayout({
             "@type": "ProfessionalService",
             "name": "R2code",
             "url": "https://r2code.com",
-            "logo": "https://r2code.com/r2code-logo.svg",
-            "image": "https://r2code.com/r2code-logo.svg",
+            "logo": "https://r2code.com/R2C/SVG/transparent.svg",
+            "image": "https://r2code.com/R2C/PNG/transparent.png",
             "description": "R2code specializes in building scalable & secure software solutions for innovative businesses. Experts in fintech, edtech, mobility, and healthcare solutions.",
             "address": {
               "@type": "PostalAddress",

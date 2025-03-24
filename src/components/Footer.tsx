@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -11,8 +12,8 @@ export default function Footer() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="col-span-1 md:col-span-1">
-              <Link href="/" className="text-2xl font-bold text-white mb-4 inline-block">
-                R2code
+              <Link href="/" className="inline-block mb-4">
+                <span className="text-white font-bold text-2xl">R2code</span>
               </Link>
               <p className="text-gray-400 mt-4 mb-6 max-w-md">
                 Building scalable and secure software solutions for innovative businesses. 
