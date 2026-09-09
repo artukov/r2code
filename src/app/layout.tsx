@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import ClientLayout from "./client-layout";
 import Script from "next/script";
+import { Analytics } from '@vercel/analytics/next';
 
 // Initialize font
 const inter = Inter({
@@ -162,6 +163,7 @@ export default function RootLayout({
       />
       <body className={`${inter.variable} font-sans antialiased`}>
         <ClientLayout>{children}</ClientLayout>
+        <Analytics />
       </body>
     </html>
   );
